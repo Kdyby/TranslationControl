@@ -1,0 +1,12 @@
+<p>
+	Select language:
+	<select>
+		{foreach $locales as $locale}
+			<option>{$locale}</option>
+		{/foreach}
+	</select>
+
+	| <a href="">Add language</a>
+</p>
+
+{control dataGrid}
