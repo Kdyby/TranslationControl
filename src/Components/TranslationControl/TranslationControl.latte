@@ -1,12 +1,14 @@
-<p>
-	Select language:
-	<select>
-		{foreach $locales as $locale}
-			<option>{$locale}</option>
-		{/foreach}
-	</select>
+<p>Translation is saved automatically when you leave the translation field.</p>
 
-	| <a href="">Add language</a>
+<p class="language">
+	Languages:
+    {foreach $locales as $locale}
+        <a n:href="this language => $locale">{$locale|upper}</a>{if !$iterator->isLast()} | {/if}
+    {/foreach}
 </p>
 
-{control dataGrid}
+{control dataGrid id => 'kdyby-translation-control-grido'}
+
+<script type="text/javascript">
+    $('.grido').grido();
+</script>

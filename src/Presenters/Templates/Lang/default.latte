@@ -10,18 +10,26 @@
 	<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v3.1.1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v3.1.1/dist/css/bootstrap-theme.min.css">
 	<style type="text/css">
-		body { padding: 0; margin: 0; font-family: 'Open Sans', sans-serif; background: #f0f0f0; }
-		h1 { font-size: 28px; margin: 0 0 45px 0; padding: 0 }
+		body { padding: 0; margin: 0; font-family: 'Open Sans', sans-serif; background: #f0f0f0; color: #333 }
+		p { color: #555 }
+		h1 { font-size: 28px; margin: 0 0 25px 0; padding: 0 0 10px 0; border-bottom: 1px solid #efefef }
 		h2 { font-size: 22px; margin: 0; padding: 0 }
 		h3 { font-size: 16px; margin: 0; padding: 0 }
 
 		#container { width: 1020px; margin: 30px auto }
 		#container-inner { padding: 40px; background: #fff; box-shadow: 3px 2px 6px #bfbfbf; border-radius: 4px }
-		#translation-control-tabs { margin-top: 30px; font-size: 13px; font-family: 'Open Sans', sans-serif }
+		#container-inner .language { margin-top: 40px }
 		#copyright { text-align: center; font-size: 10px; margin-top: 15px }
 
+        .grido table { margin-bottom: 0 }
+        .grido table td { vertical-align: middle !important }
 		.grido table, .grido .filter { font-size: 13px }
 		.grido table, .grido .filter.outer { box-shadow 0px 0px 4px 4px rgba(0,0,0,0.8) }
+		.grido table tr.untranslated td { background-color: #f4e9a8 }
+		.grido table .buttons { min-width: 150px }
+		.grido table .grid-cell-translation { width: 100% }
+		.grido table .grid-cell-catalogue { min-width: 100px }
+		.grido table .grid-cell-translation textarea { width: 100%; border: 1px solid #ccc; border-radius: 2px; padding: 3px }
 		.control-wrapper { margin-top: 30px }
 	</style>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>

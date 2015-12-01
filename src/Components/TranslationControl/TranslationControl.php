@@ -28,32 +28,47 @@ class TranslationControl extends Nette\Application\UI\Control
      */
     public function __construct(Nette\ComponentModel\IContainer $parent, $name, Translator $translator)
     {
-        $this->translator = $translator;
-        $this->locale = $translator->getLocale();
-
         parent::__construct($parent, $name);
+        $this->translator = $translator;
+        $selectedLocale = $this->getParameter('language');
+        $this->locale = $selectedLocale ?: $translator->getDefaultLocale();
     }
 
     public function createComponentDataGrid($name = NULL)
     {
+        $data = $this->generateDataFromGrid();
         $dataGrid = new Grid($this, $name);
+        $dataGrid->setRowCallback(function($row, $tr) {
+            /** @var Nette\Utils\Html $tr */
+            if (empty($row['translation'])) {
+                $tr->attrs['class'][] = 'untranslated';
+            }
+
+            return $tr;
+        });
         $dataGrid->setFilterRenderType(Filter::RENDER_INNER);
-        $dataGrid->setModel($this->generateDataGridModel());
+        $dataGrid->setModel(new ArraySource($data));
         $dataGrid->addActionHref('remove', 'Remove', 'remove');
         $dataGrid->setDefaultSort(array('translation' => 'ASC'));
-
         // Columns
+        $catalogueColumn = $dataGrid->addColumnText('catalogue', 'Catalogue');
+        $catalogueColumn->setCustomRender(function ($values) {
+            return ucfirst($values['catalogue']);
+        });
+        $catalogueColumn->setFilterSelect($this->getCataloguesInModel($data));
+        $catalogueColumn->setSortable();
         $dataGrid->addColumnText('id', 'Code')->setSortable()->setFilterText();
         $translationColumn = $dataGrid->addColumnText('translation', 'Translation');
         $translationColumn->setFilterText();
         $translationColumn->setCustomRender(function ($values) {
-            $el = Nette\Utils\Html::el('input');
+            $el = Nette\Utils\Html::el('textarea');
             $el->addAttributes(array(
                 'type' => 'text',
-                'value' => $values['translation'],
                 'class' => 'text',
-                'size' => '75'
+                'rows' => 1,
             ));
+
+            $el->add(str_replace('|', "|\n", $values['translation']));
 
             return $el;
         });
@@ -73,25 +88,72 @@ class TranslationControl extends Nette\Application\UI\Control
         $template->render();
     }
 
-    private function generateDataGridModel()
+    private function generateDataFromGrid()
     {
         $result = array();
         foreach ($this->translator->getAvailableLocales() as $locale) {
             foreach ($this->translator->getCatalogue($locale)->all() as $catalog => $translations) {
                 foreach ($translations as $code => $string) {
-                    $code = sprintf('%s.%s', $catalog, $code);
                     if ($locale != $this->locale && array_key_exists($code, $result)) {
                         continue;
                     }
 
                     $result[$code] = array(
                         'id' => $code,
+                        'catalogue' => $catalog,
                         'translation' => $locale != $this->locale ? '' : $string,
                     );
                 }
             }
         }
 
-        return new ArraySource($result);
+        $this->addUntranslatedStringsToGrid($result);
+
+        return $result;
+    }
+
+    /**
+     * Loads untranslated strings from cache and merge them with given $result
+     *
+     * @param array $result
+     */
+    private function addUntranslatedStringsToGrid(&$result)
+    {
+        $untranslatedCodes = $this->translator->getCache()->load(Translator::UNTRANSLATED_CACHE_KEY, function () {
+            return array();
+        });
+
+        foreach ($untranslatedCodes as $locale => $codes) {
+            foreach ($codes as $code) {
+                if (array_key_exists($code, $result)) {
+                    continue;
+                }
+
+                preg_match('~(.+?)\.(.+)~', $code, $matches);
+                $result[$code] = array(
+                    'id' => $matches[2],
+                    'catalogue' => $matches[1],
+                    'translation' => '',
+                );
+            }
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function getCataloguesInModel($data)
+    {
+        $result = array('');
+        foreach ($data as $row) {
+            if (in_array(ucfirst($row['catalogue']), $result)) {
+                continue;
+            }
+
+            $result[$row['catalogue']] = ucfirst($row['catalogue']);
+        }
+
+        return $result;
     }
 }
