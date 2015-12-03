@@ -19,3 +19,18 @@ interface Exception
 {
 
 }
+
+
+/**
+ * @author Martin Míka <filip@prochazka.su>
+ */
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
+{
+}
+
+/**
+ * @author Martin Míka <filip@prochazka.su>
+ */
+class UnsupportedCatalogException extends \InvalidArgumentException implements Exception
+{
+}
