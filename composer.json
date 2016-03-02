@@ -7,18 +7,17 @@
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
+		  "name": "Martin Míka",
+		  "homepage": "http://martinmika.eu",
+		  "email": "mail@martinmika.eu"
+		},
+		{
 			"name": "Filip Procházka",
 			"homepage": "http://filip-prochazka.com",
 			"email": "filip@prochazka.su"
-		},
-        {
-          "name": "Martin Míka",
-          "homepage": "http://martinmika.eu",
-          "email": "mail@martinmika.eu"
-        }
+		}
 	],
 	"support": {
-		"email": "filip@prochazka.su",
 		"issues": "https://github.com/Kdyby/TranslationControl/issues"
 	},
 	"require": {
