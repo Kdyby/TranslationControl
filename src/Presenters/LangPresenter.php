@@ -13,6 +13,8 @@ use Kdyby\Translation\Translator;
 use Kdyby\TranslationControl\Components\TranslationControl\TranslationControl;
 use Nette;
 
+
+
 /**
  * Presenter that handles basic page for translating
  *
@@ -20,12 +22,14 @@ use Nette;
  */
 class LangPresenter extends Nette\Application\UI\Presenter
 {
-    /**
-     * @param string|NULL $name
-     * @return TranslationControl
-     */
-    public function createComponentTranslationControl($name = NULL)
-    {
-        return new TranslationControl($this, $name, $this->context->getByType(Translator::class));
-    }
+
+	/**
+	 * @param string|NULL $name
+	 * @return TranslationControl
+	 */
+	public function createComponentTranslationControl($name = NULL)
+	{
+		return new TranslationControl($this, $name, $this->context->getByType(Translator::class));
+	}
+
 }

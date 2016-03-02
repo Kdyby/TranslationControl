@@ -9,13 +9,15 @@
 
 namespace Kdyby\TranslationControl\Components\TranslationControl;
 
-use Nette;
-use Kdyby;
 use Grido\Components\Filters\Filter;
 use Grido\DataSources\ArraySource;
 use Grido\Grid;
+use Kdyby;
 use Kdyby\Translation\Translator;
+use Nette;
 use Nette\ComponentModel\IContainer;
+
+
 
 /**
  * Translator Control for Kdyby Translation
@@ -24,6 +26,7 @@ use Nette\ComponentModel\IContainer;
  */
 class TranslationControl extends Nette\Application\UI\Control
 {
+
 	const DEFAULT_DOMAIN = 'messages';
 
 	/**
@@ -35,6 +38,8 @@ class TranslationControl extends Nette\Application\UI\Control
 	 * @var string
 	 */
 	private $locale;
+
+
 
 	/**
 	 * @param IContainer $parent
@@ -48,6 +53,8 @@ class TranslationControl extends Nette\Application\UI\Control
 		$selectedLocale = $this->getParameter('language');
 		$this->locale = $selectedLocale ?: $translator->getDefaultLocale();
 	}
+
+
 
 	/**
 	 * Saves translation to given catalog
@@ -68,6 +75,8 @@ class TranslationControl extends Nette\Application\UI\Control
 
 		$this->presenter->sendJson(array('status' => 1));
 	}
+
+
 
 	/**
 	 * Builds listing grid
@@ -125,6 +134,7 @@ class TranslationControl extends Nette\Application\UI\Control
 	}
 
 
+
 	/**
 	 * Renders template to client
 	 */
@@ -136,6 +146,8 @@ class TranslationControl extends Nette\Application\UI\Control
 		$template->selectedLocale = $this->locale;
 		$template->render();
 	}
+
+
 
 	/**
 	 * Iterates over all available locales a tries to find unique language translation identifiers
@@ -165,6 +177,8 @@ class TranslationControl extends Nette\Application\UI\Control
 
 		return $result;
 	}
+
+
 
 	/**
 	 * Loads untranslated strings from cache and merge them with given $result
@@ -200,6 +214,8 @@ class TranslationControl extends Nette\Application\UI\Control
 		}
 	}
 
+
+
 	/**
 	 * Makes a group of all catalogues in array
 	 *
@@ -219,6 +235,8 @@ class TranslationControl extends Nette\Application\UI\Control
 
 		return $result;
 	}
+
+
 
 	/**
 	 * Saves translation to catalog. ONLY NEON IS SUPPORTED AT THIS MOMENT
@@ -258,6 +276,8 @@ class TranslationControl extends Nette\Application\UI\Control
 		}
 	}
 
+
+
 	/**
 	 * @param string $filePath
 	 * @param string $code
@@ -275,6 +295,8 @@ class TranslationControl extends Nette\Application\UI\Control
 		file_put_contents($filePath, Nette\Neon\Neon::encode($result, Nette\Neon\Neon::BLOCK));
 	}
 
+
+
 	/**
 	 * We must create an array from code like 'homepage.something' to array('homepage => array('something' => $string))
 	 *
@@ -290,7 +312,7 @@ class TranslationControl extends Nette\Application\UI\Control
 		}
 
 		$pointer = &$resultArray;
-		for ($i = 0; $i < sizeof($levels); $i++) {
+		for ($i = 0 ; $i < sizeof($levels) ; $i++) {
 			if (!isset($pointer[$levels[$i]])) {
 				$pointer[$levels[$i]] = array();
 			}
@@ -302,4 +324,5 @@ class TranslationControl extends Nette\Application\UI\Control
 
 		return $resultArray;
 	}
+
 }

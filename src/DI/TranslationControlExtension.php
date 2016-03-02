@@ -11,6 +11,8 @@ namespace Kdyby\TranslationControl\DI;
 
 use Nette;
 
+
+
 /**
  * Translator Control Extension for Nette
  *
@@ -18,6 +20,7 @@ use Nette;
  */
 class TranslationControlExtension extends Nette\DI\CompilerExtension
 {
+
 	/**
 	 * @var array
 	 */
@@ -26,12 +29,16 @@ class TranslationControlExtension extends Nette\DI\CompilerExtension
 		'registerDefaultUrl' => FALSE,
 	);
 
+
+
 	public function loadConfiguration()
 	{
 		if ($this->getConfig($this->defaults)['registerDefaultUrl']) {
 			$this->setupPresenterMapping();
 		}
 	}
+
+
 
 	public function afterCompile(Nette\PhpGenerator\ClassType $class)
 	{
@@ -44,14 +51,18 @@ class TranslationControlExtension extends Nette\DI\CompilerExtension
 		}
 	}
 
+
+
 	public function setupPresenterMapping()
 	{
 		$this->getContainerBuilder()->getDefinition('nette.presenterFactory')->addSetup('setMapping',
 			array(
-				array('KdybyTranslationControl' => 'Kdyby\TranslationControl\Presenters\*Presenter')
+				array('KdybyTranslationControl' => 'Kdyby\TranslationControl\Presenters\*Presenter'),
 			)
 		);
 	}
+
+
 
 	/**
 	 * @param Nette\Application\Routers\RouteList $routeList
@@ -68,6 +79,8 @@ class TranslationControlExtension extends Nette\DI\CompilerExtension
 		$property->setAccessible(FALSE);
 	}
 
+
+
 	/**
 	 * @param string $url
 	 * @return Nette\Application\Routers\Route
@@ -78,7 +91,8 @@ class TranslationControlExtension extends Nette\DI\CompilerExtension
 			'module' => 'KdybyTranslationControl',
 			'presenter' => 'Lang',
 			'action' => 'default',
-			'id' => null
+			'id' => NULL,
 		));
 	}
+
 }
