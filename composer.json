@@ -10,7 +10,12 @@
 			"name": "Filip Procházka",
 			"homepage": "http://filip-prochazka.com",
 			"email": "filip@prochazka.su"
-		}
+		},
+        {
+          "name": "Martin Míka",
+          "homepage": "http://martinmika.eu",
+          "email": "mail@martinmika.eu"
+        }
 	],
 	"support": {
 		"email": "filip@prochazka.su",
@@ -19,8 +24,8 @@
 	"require": {
 		"nette/application": "~2.3@dev",
 		"nette/di": "~2.3@dev",
-
-		"kdyby/translation": "~2.2@dev"
+		"kdyby/translation": "~2.2@dev",
+        "o5/grido" : "~1.1.0"
 	},
 	"require-dev": {
 		"nette/application": "~2.3@dev",
@@ -44,7 +49,6 @@
 		"nette/utils": "~2.3@dev",
 		"latte/latte": "~2.3@dev",
 		"tracy/tracy": "~2.3@dev",
-
 		"nette/tester": "~1.4",
 		"mockery/mockery": "~0.9"
 	},

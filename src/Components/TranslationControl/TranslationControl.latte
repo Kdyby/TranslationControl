@@ -1,0 +1,28 @@
+<p>Translation is saved automatically when you leave the translation field.</p>
+
+<p class="language">
+	Languages:
+    {foreach $locales as $locale}
+        <a n:href="this language => $locale"{if $locale == $selectedLocale} class="selected"{/if}>{$locale|upper}</a>{if !$iterator->isLast()} | {/if}
+    {/foreach}
+</p>
+
+{control dataGrid id => 'kdyby-translation-control-grido'}
+
+<script type="text/javascript">
+    $('.grido').grido();
+    $('textarea[data-translation-control-change-url]').blur(function() {
+        var $textarea = $(this);
+        if ($textarea.val() == this.defaultValue) {
+            return;
+        }
+
+        $.post($textarea.data('translation-control-change-url'), { string: this.value }, function(response) {
+            if (!response.error) {
+                $textarea.closest('tr').addClass('translated');
+            } else {
+                alert(response.error);
+            }
+        });
+    });
+</script>
