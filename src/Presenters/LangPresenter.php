@@ -10,7 +10,7 @@
 namespace Kdyby\TranslationControl\Presenters;
 
 use Kdyby\Translation\Translator;
-use Kdyby\TranslationControl\Components\TranslationControl;
+use Kdyby\TranslationControl\Components\TranslationControl\TranslationControl;
 use Nette;
 
 /**
