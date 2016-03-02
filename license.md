@@ -18,7 +18,9 @@ New BSD License
 ---------------
 
 Copyright (c) 2015 Martin Míka (http://martinmika.eu)
+
 Copyright (c) 2008 Filip Procházka (http://filip-prochazka.com)
+
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
