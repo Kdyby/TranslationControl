@@ -24,10 +24,9 @@
 		"nette/application": "~2.3@dev",
 		"nette/di": "~2.3@dev",
 		"kdyby/translation": "~2.2@dev",
-        "o5/grido" : "~1.1.0"
+        "o5/grido" : "~2.1.0"
 	},
 	"require-dev": {
-		"nette/application": "~2.3@dev",
 		"nette/bootstrap": "~2.3@dev",
 		"nette/caching": "~2.3@dev",
 		"nette/component-model": "~2.2@dev",
