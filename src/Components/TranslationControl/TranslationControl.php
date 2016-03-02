@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the file license.txt that was distributed with this source code.
  */
 
-namespace Kdyby\TranslationControl\Components;
+namespace Kdyby\TranslationControl\Components\TranslationControl;
 
 use Nette;
 use Kdyby;
@@ -88,6 +88,7 @@ class TranslationControl extends Nette\Application\UI\Control
 
 			return $tr;
 		});
+
 		$dataGrid->setFilterRenderType(Filter::RENDER_INNER);
 		$dataGrid->setModel(new ArraySource($data));
 		$dataGrid->addActionHref('remove', 'Remove', 'remove');
