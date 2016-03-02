@@ -54,7 +54,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Kdyby\\TranslationControl\\": "src/"
+			"Kdyby\\TranslationControl": "src/"
 		},
 		"classmap": [
 			"src/exceptions.php"
