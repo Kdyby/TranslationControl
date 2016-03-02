@@ -20,11 +20,6 @@ use Nette;
  */
 class LangPresenter extends Nette\Application\UI\Presenter
 {
-    public function startup()
-    {
-        parent::startup();
-    }
-
     /**
      * @param string|NULL $name
      * @return TranslationControl
