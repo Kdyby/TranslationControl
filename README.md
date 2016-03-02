@@ -1,7 +1,7 @@
 Kdyby/TranslationControl
 ======
 
-[![Build Status](https://travis-ci.org/Kdyby/TranslationControl.svg?branch=master)](https://travis-ci.org/Kdyby/TranslationTranslationControl)
+[![Build Status](https://travis-ci.org/Kdyby/TranslationControl.svg?branch=master)](https://travis-ci.org/Kdyby/TranslationControl)
 [![Downloads this Month](https://img.shields.io/packagist/dm/kdyby/translation-control.svg)](https://packagist.org/packages/kdyby/translation-control)
 [![Latest stable](https://img.shields.io/packagist/v/kdyby/translation-control.svg)](https://packagist.org/packages/kdyby/translation-control)
 
@@ -33,4 +33,4 @@ Learn more in the [documentation](https://github.com/Kdyby/TranslationControl/bl
 
 -----
 
-Homepage [http://www.kdyby.org](http://www.kdyby.org) and repository [http://github.com/kdyby/TranslationControl](http://github.com/Kdyby/TranslationControl).
+Homepage [http://www.kdyby.org](http://www.kdyby.org) and repository [http://github.com/Kdyby/TranslationControl](http://github.com/Kdyby/TranslationControl).
