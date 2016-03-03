@@ -50,8 +50,7 @@ class TranslationControl extends Nette\Application\UI\Control
 	{
 		parent::__construct($parent, $name);
 		$this->translator = $translator;
-		$selectedLocale = $this->getParameter('language');
-		$this->locale = $selectedLocale ?: $translator->getDefaultLocale();
+		$this->locale = $this->getParameter('language') ?: $translator->getAvailableLocales()[0];
 	}
 
 
@@ -160,11 +159,12 @@ class TranslationControl extends Nette\Application\UI\Control
 		foreach ($this->translator->getAvailableLocales() as $locale) {
 			foreach ($this->translator->getCatalogue($locale)->all() as $catalog => $translations) {
 				foreach ($translations as $code => $string) {
-					if ($locale != $this->locale && array_key_exists($code, $result)) {
+					$key = $catalog . $code;
+					if ($locale != $this->locale && array_key_exists($key, $result)) {
 						continue;
 					}
 
-					$result[$code] = array(
+					$result[$key] = array(
 						'id' => $code,
 						'catalogue' => $catalog,
 						'translation' => $locale != $this->locale ? '' : $string,
@@ -173,7 +173,8 @@ class TranslationControl extends Nette\Application\UI\Control
 			}
 		}
 
-		$this->addUntranslatedStringsToGrid($result);
+		//TODO Redesign component to load data from psrLogger
+		//$this->addUntranslatedStringsToGrid($result);
 
 		return $result;
 	}
@@ -181,37 +182,39 @@ class TranslationControl extends Nette\Application\UI\Control
 
 
 	/**
-	 * Loads untranslated strings from cache and merge them with given $result
+	 * Loads untranslated strings
 	 *
 	 * @param array $result
 	 */
 	private function addUntranslatedStringsToGrid(&$result)
 	{
-		$untranslatedCodes = $this->translator->getCache()->load(Translator::UNTRANSLATED_CACHE_KEY, function () {
-			return array();
-		});
+		//TODO Redesign component to load data from psrLogger
 
-		foreach ($untranslatedCodes as $locale => $codes) {
-			foreach ($codes as $code) {
-				if (array_key_exists($code, $result)) {
-					continue;
-				}
-
-				if (!preg_match('~(.+?)\.(.+)~', $code, $matches)) {
-					$id = $code;
-					$catalogue = self::DEFAULT_DOMAIN;
-				} else {
-					$id = $matches[2];
-					$catalogue = $matches[1];
-				}
-
-				$result[$code] = array(
-					'id' => $id,
-					'catalogue' => $catalogue,
-					'translation' => '',
-				);
-			}
-		}
+//		$untranslatedCodes = $this->translator->getCache()->load(Translator::UNTRANSLATED_CACHE_KEY, function () {
+//			return array();
+//		});
+//
+//		foreach ($untranslatedCodes as $locale => $codes) {
+//			foreach ($codes as $code) {
+//				if (array_key_exists($code, $result)) {
+//					continue;
+//				}
+//
+//				if (!preg_match('~(.+?)\.(.+)~', $code, $matches)) {
+//					$id = $code;
+//					$catalogue = self::DEFAULT_DOMAIN;
+//				} else {
+//					$id = $matches[2];
+//					$catalogue = $matches[1];
+//				}
+//
+//				$result[$code] = array(
+//					'id' => $id,
+//					'catalogue' => $catalogue,
+//					'translation' => '',
+//				);
+//			}
+//		}
 	}
 
 
